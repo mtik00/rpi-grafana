@@ -1,0 +1,29 @@
+version: "3.8"
+services:
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - $PWD/grafana/data:/var/lib/grafana
+    environment: 
+      - "GF_INSTALL_PLUGINS=grafana-piechart-panel,grafana-clock-panel,grafana-simple-json-datasource,natel-discrete-panel"
+
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+
+  influx:
+    image: influxdb:1.8-alpine
+    ports:
+      - "8086:8086"
+    volumes:
+      - $PWD/influxdb/influxdb.conf:/etc/influxdb/influxdb.conf:ro
+      - $PWD/influxdb/data:/var/lib/influxdb
+      - $PWD/influxdb/scripts:/docker-entrypoint-initdb.d:ro
+
+  unifi-poller:
+    image: golift/unifi-poller:latest
+    volumes:
+      - $PWD/unifi-poller/unifi-poller.conf:/config/unifi-poller.conf:ro
