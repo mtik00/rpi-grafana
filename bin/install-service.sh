@@ -11,14 +11,14 @@ service_file="${env_dir}/rpi-grafana.service"
 mkdir -p ${env_dir}
 
 echo "...creating ${service_file}"
-cat << EOF > ${service_file}
+cat <<EOF > ${service_file}
 [Unit]
 Description=Grafana dashboard on an RPi!
 Requires=docker.service
 After=docker.service
 
 [Service]
-Environment="PWD=$PWD"
+WorkingDirectory=${base_dir}
 Restart=always
 User=ubuntu
 Group=docker
