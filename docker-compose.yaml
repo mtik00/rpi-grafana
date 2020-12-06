@@ -28,6 +28,10 @@ services:
   unifi-poller:
     image: golift/unifi-poller:latest
     restart: unless-stopped
+    environment: 
+      - UP_UNIFI_DEFAULT_USER=${UNIFI_USER}
+      - UP_UNIFI_DEFAULT_PASS=${UNIFI_PASS}
+      - UP_UNIFI_DEFAULT_URL=${UNIFI_URL}
     volumes:
       - $PWD/unifi-poller/unifi-poller.conf:/config/unifi-poller.conf:ro
 
