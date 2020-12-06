@@ -27,9 +27,9 @@ services:
     ports:
       - "8086:8086"
     volumes:
-      - $PWD/influxdb/influxdb.conf:/etc/influxdb/influxdb.conf:ro
       - influx-data:/var/lib/influxdb
-      - $PWD/influxdb/scripts:/docker-entrypoint-initdb.d:ro
+      - "./influxdb/influxdb.conf:/etc/influxdb/influxdb.conf:ro"
+      - "./influxdb/scripts:/docker-entrypoint-initdb.d:ro"
 
   unifi-poller:
     image: golift/unifi-poller:latest
@@ -39,7 +39,7 @@ services:
       - UP_UNIFI_DEFAULT_PASS=${UNIFI_PASSWORD}
       - UP_UNIFI_DEFAULT_URL=${UNIFI_URL}
     volumes:
-      - $PWD/unifi-poller/unifi-poller.conf:/config/unifi-poller.conf:ro
+      - "./unifi-poller/unifi-poller.conf:/config/unifi-poller.conf:ro"
     logging:
       options:
         max-size: 20m
