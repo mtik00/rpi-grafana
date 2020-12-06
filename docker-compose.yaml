@@ -9,11 +9,17 @@ services:
       - grafana-data:/var/lib/grafana
     environment: 
       - "GF_INSTALL_PLUGINS=grafana-piechart-panel,grafana-clock-panel,grafana-simple-json-datasource,natel-discrete-panel"
+    logging:
+      options:
+        max-size: 20m
 
   prometheus:
     image: prom/prometheus:latest
     ports:
       - "9090:9090"
+    logging:
+      options:
+        max-size: 20m
 
   influx:
     image: influxdb:latest
@@ -34,6 +40,9 @@ services:
       - UP_UNIFI_DEFAULT_URL=${UNIFI_URL}
     volumes:
       - $PWD/unifi-poller/unifi-poller.conf:/config/unifi-poller.conf:ro
+    logging:
+      options:
+        max-size: 20m
 
 volumes: 
   grafana-data:
