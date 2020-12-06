@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 this_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 base_dir=$(readlink -f ${this_dir}/..)
-compose_file=`readlink -f $(ls ../docker-compose*)`
+compose_file=`readlink -f $(ls ${base_dir}/docker-compose*)`
 docker_compose=$(which docker-compose)
 env_dir="${base_dir}/env"
 docker_compose_env_file="${base_dir}/.env"
